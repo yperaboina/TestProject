@@ -63,7 +63,7 @@ public class WebTest1 {
 	        Password=row.getCell(6).toString();
 	        sbaseUrl=row.getCell(7).toString();
 	        System.out.println(" Readed values sTestCase_Id= " + sTestCase_Id + ", service= "+service + " sbaseUrl= " +sbaseUrl );
-	        System.out.println("End of read row");
+	        System.out.println("End of readRow method");
 	    }
 	
 	public static void login(String SiteBaseUrl,String UserEmailAddress1, String UserPassword1) throws Exception
