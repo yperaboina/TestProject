@@ -10,13 +10,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.poi.*;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -25,15 +18,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.apache.poi.xssf.usermodel.*;
+import org.openqa.selenium.*;
 
 import objectRepository.*;
 import properties.*;
-
-
-//import src.Scripts.HSSFRow;
-//import src.Scripts.HSSFSheet;
-//import src.Scripts.HSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WebTest1 {	
 	public static String expectedTitle, actualTitle;
