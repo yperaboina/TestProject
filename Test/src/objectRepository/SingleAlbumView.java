@@ -6,6 +6,7 @@ public class SingleAlbumView {
 	public static String reArrangeCancel="//a[@id='reArrangeCancel']";
 	public static String reArrangeDone="//a[@id='reArrangeDone']";
 	public static String fifthImage="xpath=(//div[class='selectable-asset drag-drop ui-draggable ui-draggable-handle ui-droppable'])[5]";
+	public static String firstImage="xpath=(//div[class='selectable-asset drag-drop ui-draggable ui-draggable-handle ui-droppable'])[1]";
 	public static String secondImage="xpath=(//div[class='selectable-asset drag-drop ui-draggable ui-draggable-handle ui-droppable'])[2]";
 	
 	public static String slideShowIcon="//div[@name='sav_slideshow']";

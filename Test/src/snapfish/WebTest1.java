@@ -1,6 +1,9 @@
 
 package snapfish;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -10,6 +13,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import javax.imageio.ImageIO;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -18,6 +23,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.gargoylesoftware.htmlunit.javascript.host.URL;
+
 import org.apache.poi.xssf.usermodel.*;
 import org.openqa.selenium.*;
 
@@ -86,7 +94,7 @@ public class WebTest1 {
 		 }
 			                         SignInButton.click();
 			                         System.out.println(driver.getTitle());	
-		                             closeForeseelayer();
+		                           //  closeForeseelayer();
 
 			                         //Thread.sleep(waitTime);
 		                             EmailAddress = driver.findElement(By.xpath(EmailAddress2));		           
@@ -102,12 +110,23 @@ public class WebTest1 {
 		                             System.out.println("User sucessfully navigated to home page");
 		                            // Thread.sleep(waitTime);
 		                             //Thread.sleep(waitTime);
-		                             closeForeseelayer();
+		                            // closeForeseelayer();
 		
 		
 	}
 		
-	public static void closeForeseelayer() throws Exception{
+	//this method is not working, ignore it until update it again
+	public static void getTitleWithJavaScript() throws Exception
+	{
+		// Initialize the JS object.
+		JavascriptExecutor JS = (JavascriptExecutor)driver;
+		
+		// Get the current site title.
+		String sitetitle = (String)JS.executeScript("return document.title");
+		System.out.println("My Site Title: " + sitetitle);
+		
+	}
+/*	public static void closeForeseelayer() throws Exception{
 		 try {
 			 System.out.println("\n Entered into closeForeseelayer() method");
         	 if((driver.findElement(By.xpath(ForeSeeLayer.NoThanksBTN)).isDisplayed()))
@@ -121,13 +140,14 @@ public class WebTest1 {
 		 System.out.println("\n exit from closeForeseelayer() method as not found Foreseelayer");
 	}
 
+*/
 	
 	public static void openLibraryPage() throws Exception{
 		try{
 		//Thread.sleep(waitTime);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		WebElement MYPHOTOS=driver.findElement(By.xpath(GlobalHeader.MyPhotos));
-		closeForeseelayer();
+		// closeForeseelayer();
 		MYPHOTOS.click();
 		System.out.println(driver.getTitle());
 		//driver.getTitle().equalsIgnoreCase("Photo Library");
@@ -171,7 +191,7 @@ public class WebTest1 {
 		driver.findElement(By.xpath(LibraryPage.MyFavoritesAlbumsDefaultTxt1)).getText().matches("Show your photos some love!");
 		driver.findElement(By.xpath(LibraryPage.MyFavoritesAlbumsDefaultTxt2)).getText().matches("Pick your favorites and we’ll keep them right here for you.");
 		System.out.println("displayed text on the web page is "+ driver.findElement(By.xpath(LibraryPage.MyFavoritesAlbumsDefaultTxt1)).getText() + "\n" + driver.findElement(By.xpath(LibraryPage.MyFavoritesAlbumsDefaultTxt2)).getText());
-		closeForeseelayer();
+		//closeForeseelayer();
 		
 		}
 		catch(Exception e){
@@ -183,7 +203,7 @@ public class WebTest1 {
 		String uploadPageTitle = "";
 		try{
 			System.out.print("\n Entered into verifyMydeviceIconInNoPhotosPage()");
-            closeForeseelayer();
+         //   closeForeseelayer();
 			driver.findElement(By.xpath(LibraryPage.MyDeviceIcon)).click();
 			System.out.print("\n My device icon clicked on default page");
 			Thread.sleep(waitTime);
@@ -228,7 +248,7 @@ public class WebTest1 {
 		String FacebookPageTitle = "";
 		try{
 			System.out.print("\n Entered into verifyFacebookInNoPhotosPage()");
-            closeForeseelayer();
+          //  closeForeseelayer();
 			driver.findElement(By.xpath(LibraryPage.FacebookIcon)).click();
 			System.out.print("\n Facebook icon clicked on default page");
 			Thread.sleep(waitTime);
@@ -272,7 +292,7 @@ public class WebTest1 {
 		String GooglePageTitle = "";
 		try{
 			System.out.print("\n Entered into verifyGoogleInNoPhotosPage()");
-            closeForeseelayer();
+           // closeForeseelayer();
 			driver.findElement(By.xpath(LibraryPage.GoogleIcon)).click();
 			System.out.print("\n Google icon clicked on default page");
 			Thread.sleep(waitTime);
@@ -316,7 +336,7 @@ public class WebTest1 {
 		String InstagramPageTitle = "";
 		try{
 			System.out.print("\n Entered into verifyInstagramInNoPhotosPage()");
-            closeForeseelayer();
+         //   closeForeseelayer();
 			driver.findElement(By.xpath(LibraryPage.InstagramIcon)).click();
 			System.out.print("\n Instagram icon clicked on default page");
 			Thread.sleep(waitTime);
@@ -360,7 +380,7 @@ public class WebTest1 {
 		String FlickrPageTitle = "";
 		try{
 			System.out.print("\n Entered into verifyFlickrInNoPhotosPage()");
-            closeForeseelayer();
+           // closeForeseelayer();
 			driver.findElement(By.xpath(LibraryPage.FlickrIcon)).click();
 			System.out.print("\n Flickr icon clicked on default page");
 			Thread.sleep(waitTime);
@@ -690,7 +710,7 @@ public class WebTest1 {
 		Thread.sleep(waitTime);	
 		if(driver.findElement(By.xpath(SingleAlbumView.reArrangeCancel)).isDisplayed())
 		{
-			WebElement source = driver.findElement(By.xpath(SingleAlbumView.fifthImage));
+			WebElement source = driver.findElement(By.xpath(SingleAlbumView.firstImage));
 			WebElement target = driver.findElement(By.xpath(SingleAlbumView.secondImage));
 			(new Actions(driver)).dragAndDrop(source, target).perform();
 			System.out.println("shuffeled the photos");
@@ -735,6 +755,7 @@ public class WebTest1 {
 		capabilities.setCapability("marionette", true);
 		//WebDriver driver = new MarionetteDriver(capabilities); 
 		driver=new FirefoxDriver(capabilities);
+		driver.manage().window().maximize();
 		 System.out.println("end of launchFirefoxBrowser method");
 	}
 	
@@ -746,7 +767,7 @@ public class WebTest1 {
 		//ldap-login
 		try{
 		  if (ldapURL.contains("ldap-login")){
-			  closeForeseelayer();
+			//  closeForeseelayer();
 			  driver.findElement(By.xpath(LdapLogin.ldapUserNameTxtbox)).sendKeys("yperaboina12");;
 			  driver.findElement(By.xpath(LdapLogin.ldapPasswordTxtbox)).sendKeys("June*2018");;
 			  driver.findElement(By.xpath(LdapLogin.ldapLoginBtn)).click();
@@ -797,7 +818,7 @@ public class WebTest1 {
 		for (int i=0;i<=numberOfProjectsToDelete;i++){
 		try{
 		  if (driver.findElement(By.xpath(ProjectsPage.FirstProject)).isDisplayed()){
-			  closeForeseelayer();
+			//  closeForeseelayer();
 			  WebElement element = driver.findElement(By.xpath(ProjectsPage.FirstProject));
 			  Actions action = new Actions(driver);			  
 		      action.moveToElement(element).build().perform();
@@ -830,17 +851,75 @@ public class WebTest1 {
 		}
 	}
 	
+	/*
+	public static String decodeQRCode(URL qrCodeImage) throws IOException, NotFoundException {
+	    BufferedImage bufferedImage = ImageIO.read(qrCodeImage);
+	    LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+	    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+	    Result result = new MultiFormatReader().decode(bitmap);
+	    return result.getText();
+	}
+	*/
+/*	
+	public static String decodeQRCode(String base64QRCode) throws IOException, NotFoundException {
+		byte[] decoded = Base64.decodeBase64(base64Source);
+		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(base64QRCode));
+		    LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+		    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+		    Result result = new MultiFormatReader().decode(bitmap);
+		    return result.getText();
+		}
+	
+	*/
+	
+	public static void doubleClickonImage() throws Exception {
+		try
+		{
+		System.out.println(" entered into doubleClickonImage method");
+		WebElement item = driver.findElement(By.xpath(SingleAlbumView.SingleAlbumViewPhoto));
+		//Actions dummy = new Actions (driver);
+		//dummy.doubleClick(item).build().perform();
+		
+		//instead of above 2 lines of code, we can write in single line.
+		new Actions(driver).doubleClick(item).build().perform();
+		System.out.println(" double click action performed");
+		
+		WebElement downLoadIcon=driver.findElement(By.xpath(PhotoDetailedView.downloadIcon));
+		if (downLoadIcon.isDisplayed()){
+			System.out.println(" photo detailed view displayed and download icon displayed");
+		}
+		
+		}
+		catch(Exception e){
+			System.out.println("can not perform double click action " + e);
+			
+		}
+	}
+	
+	public static void dragAndDrop() throws Exception {
+		String canvasBuilderUrl= "https://us.sf-qa.com/create/builder?sku=CommerceProduct_10206&category=singlesurface&projectId=14226229060";
+		driver.navigate().to(canvasBuilderUrl);
+
+		System.out.println("\n URL in the browser is "+ driver.getCurrentUrl()+  "\n broswer title is:  "+driver.getTitle());
+		Thread.sleep(6000);
+		
+		
+	}
+	
+	
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
 		 long startTime = System.currentTimeMillis();
 		 System.out.println("Start time is: "+ startTime);
-		readRow(8);
+		readRow(9);
 		//launchChromeBrowser();
 		launchFirefoxBrowser();
-		//driver.manage().window().maximize();
+		
 		ldapLogin();
-		login(sbaseUrl,EmailId,Password);
+		getTitleWithJavaScript();
+		//login(sbaseUrl,EmailId,Password);
+		//getTitleWithJavaScript();
 		//openLibraryPage();
 		//verifyMyDeviceFBGoogleInstaFlickr();
 		//verifyFacebookInNoPhotosPage();
@@ -851,6 +930,7 @@ public class WebTest1 {
 		//openSingleAlbumPageRightClick();
 		//scrollDownThePage();
 		 //openSingleAlbumPage();
+		// selectPhotosInSAV();
 		//verifyPhotosCount();
 		//reArrangePhotos();
       //openSingleAlbumPage();
@@ -871,6 +951,7 @@ public class WebTest1 {
 		//rightClickExample();
 		//saveProject(53); //- readrow(8);
 		//deleteProject(0);
+		// doubleClickonImage();
 		
 		 long stopTime = System.currentTimeMillis();
 		 System.out.println("\n stop time is "+stopTime);
